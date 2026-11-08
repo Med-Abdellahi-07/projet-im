@@ -2,7 +2,7 @@
 
 **A web application to track industrial and mining equipment: breakdowns, repair interventions and a live dashboard, with secure login.**
 
-Team: TODO
+Individual internship project.
 
 Live demo: TODO (link added after deployment, see [docs/DEPLOY.md](docs/DEPLOY.md)).
 Demo account (fictional data, reset regularly): `demo@projet-im.app` / `Demo-2026-IM`.
@@ -13,9 +13,27 @@ Demo account (fictional data, reset regularly): `demo@projet-im.app` / `Demo-202
 
 ## Context
 
-This is a school project of the Artificial Intelligence program at Université de Nouadhibou (Mauritania), started in September 2026. A mine or a factory has many machines; when one breaks down, people need to know which machine, how serious it is, who repaired it and what is still broken. The first version was a prototype that worked on one laptop. This version makes it correct, secure, tested and deployable.
+This is my individual internship project at SNIM (Société Nationale Industrielle et Minière, Mauritania), carried out in September 2026 over four weeks. The assignment was titled "Développement d'une application web de suivi des équipements industriels" (development of a web application to track industrial equipment).
 
-The interface is in French (the language of the project); the code, the documentation and the commit history are in English.
+A mine or a factory has many machines; when one breaks down, people need to know which machine, how serious it is, who repaired it and what is still broken. The goal of the internship was an application to follow equipment and its maintenance. The planned features were:
+
+- equipment management (create, read, update, delete);
+- equipment states;
+- breakdown tracking;
+- maintenance interventions;
+- search and filters;
+- a dashboard.
+
+The stack required by the internship was HTML5, CSS3, JavaScript, SQL and Git. I added an Express backend (Node.js) with a MySQL database.
+
+The interface is in French (the language of the project); the code, the documentation and the commit messages are in English.
+
+**Not an official SNIM product.** This repository contains only fictional demo data; no SNIM data, logos or internal information. Published with the approval of my internship supervisor.
+
+## Project history
+
+1. **The internship version (September 2026).** The first commit ("Initial commit") is the application as I wrote it during the internship.
+2. **The November 2026 hardening.** Server-side authentication, security measures, input validation, the breakdown status logic, tests, CI, deployment configuration, the split into ES modules and this documentation were done with AI-assisted development (Claude, by Anthropic), directed and reviewed by me. Each topic is a separate commit, so the two phases can be told apart in the history.
 
 ## Features
 
@@ -172,7 +190,7 @@ Free hosting without a credit card: Render (web service) and TiDB Cloud Starter 
 
 ## Development notes
 
-The first prototype is the initial commit of this repository. The security hardening, restructuring, tests and documentation of this version were done with the help of an AI coding assistant (Claude, by Anthropic); commits made with its help carry a `Co-Authored-By` trailer. All changes are tested before merging.
+The internship version was written by me (see "Project history" above). The November 2026 hardening (security, restructuring, tests, CI, deployment and documentation) was done with the help of an AI coding assistant (Claude, by Anthropic), directed and reviewed by me; commits made with its help carry a `Co-Authored-By` trailer. All changes are tested before merging.
 
 ## License
 
