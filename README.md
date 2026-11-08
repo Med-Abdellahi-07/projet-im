@@ -4,8 +4,10 @@
 
 Individual internship project.
 
-Live demo: TODO (link added after deployment, see [docs/DEPLOY.md](docs/DEPLOY.md)).
+Live demo: <https://projet-im.onrender.com> (Render free plan with a TiDB Cloud Starter database, Frankfurt).
 Demo account (fictional data, reset regularly): `demo@projet-im.app` / `Demo-2026-IM`.
+
+The free plan puts the service to sleep after 15 minutes without visitors, so the first request can take about 50 seconds while it wakes up; after that it responds normally. See [docs/DEPLOY.md](docs/DEPLOY.md) for how it is deployed.
 
 ![Demo: report a breakdown, resolve it with an intervention, watch the equipment state change](docs/screenshots/demo.gif)
 
