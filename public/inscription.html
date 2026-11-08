@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Créer un compte · Industriel &amp; Minier</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="ecran-auth">
+            <div class="carte-auth">
+                <div class="marque-auth">
+                    <span class="pastille">IM</span>
+                    <span class="texte">Industriel &amp; Minier</span>
+                </div>
+
+                <h1>Créer un compte</h1>
+                <p class="soustitre">L'inscription se fait par email : un code de vérification vous sera envoyé.</p>
+
+                <div class="message-erreur-globale" id="message-erreur-globale"></div>
+
+                <form id="form-inscription">
+                    <label for="email">Adresse email</label>
+                    <input type="email" id="email" name="email" placeholder="nom@exemple.com" autocomplete="email">
+                    <div class="erreur" id="erreur-email"></div>
+
+                    <label for="mot_de_passe">Mot de passe</label>
+                    <input type="password" id="mot_de_passe" name="mot_de_passe" placeholder="8 caractères minimum" autocomplete="new-password">
+                    <div class="erreur" id="erreur-mot-de-passe"></div>
+
+                    <label for="confirmation">Confirmer le mot de passe</label>
+                    <input type="password" id="confirmation" name="confirmation" placeholder="retapez le mot de passe" autocomplete="new-password">
+                    <div class="erreur" id="erreur-confirmation"></div>
+
+                    <div class="actions-formulaire">
+                        <button type="submit" class="pleine-largeur">Créer mon compte</button>
+                    </div>
+                </form>
+
+                <p class="lien-bas">Déjà un compte ? <a href="login.html">Se connecter</a></p>
+            </div>
+        </div>
+        <script type="module" src="js/pages/signup.js"></script>
+    </body>
+</html>

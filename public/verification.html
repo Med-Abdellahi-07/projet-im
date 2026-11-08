@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Vérification du compte · Industriel &amp; Minier</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="ecran-auth">
+            <div class="carte-auth">
+                <div class="marque-auth">
+                    <span class="pastille">IM</span>
+                    <span class="texte">Industriel &amp; Minier</span>
+                </div>
+
+                <h1>Vérification du compte</h1>
+                <p class="soustitre" id="texte-explication">Un code à 6 chiffres a été envoyé par email. Saisissez-le ci-dessous pour activer votre compte.</p>
+
+                <div class="message-info" id="message-code-test" hidden></div>
+                <div class="message-erreur-globale" id="message-erreur-globale"></div>
+
+                <form id="form-verification">
+                    <label for="code">Code de vérification</label>
+                    <input type="text" id="code" name="code" placeholder="000000" maxlength="6" inputmode="numeric" autocomplete="one-time-code">
+                    <div class="erreur" id="erreur-code"></div>
+
+                    <div class="actions-formulaire">
+                        <button type="submit" class="pleine-largeur">Vérifier le compte</button>
+                    </div>
+                </form>
+
+                <p class="lien-bas">
+                    Vous n'avez rien reçu ?
+                    <a href="#" id="lien-renvoyer">Renvoyer le code</a>
+                </p>
+            </div>
+        </div>
+        <script type="module" src="js/pages/verify.js"></script>
+    </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Connexion · Industriel &amp; Minier</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="ecran-auth">
+            <div class="carte-auth">
+                <div class="marque-auth">
+                    <span class="pastille">IM</span>
+                    <span class="texte">Industriel &amp; Minier</span>
+                </div>
+
+                <h1>Connexion</h1>
+                <p class="soustitre">Accédez au suivi des équipements, pannes et interventions.</p>
+
+                <div class="message-succes" id="message-succes" hidden></div>
+                <div class="message-erreur-globale" id="message-erreur-globale"></div>
+
+                <form id="form-connexion">
+                    <label for="email">Adresse email</label>
+                    <input type="email" id="email" name="email" placeholder="nom@exemple.com" autocomplete="email">
+                    <div class="erreur" id="erreur-email"></div>
+
+                    <label for="mot_de_passe">Mot de passe</label>
+                    <input type="password" id="mot_de_passe" name="mot_de_passe" placeholder="mot de passe" autocomplete="current-password">
+                    <div class="erreur" id="erreur-mot-de-passe"></div>
+
+                    <div class="actions-formulaire">
+                        <button type="submit" class="pleine-largeur">Se connecter</button>
+                    </div>
+                </form>
+
+                <p class="lien-bas">Pas encore de compte ? <a href="inscription.html">Créer un compte</a></p>
+            </div>
+        </div>
+        <script type="module" src="js/pages/login.js"></script>
+    </body>
+</html>

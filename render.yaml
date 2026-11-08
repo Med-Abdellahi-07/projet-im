@@ -1,0 +1,38 @@
+# Render Blueprint: one free web service (API + frontend).
+# The database is an external MySQL-compatible service (TiDB Cloud Starter);
+# its credentials are entered in the Render dashboard, never stored here.
+# See docs/DEPLOY.md for the click-by-click steps.
+services:
+    - type: web
+      name: projet-im
+      runtime: node
+      plan: free
+      region: frankfurt
+      buildCommand: npm ci --omit=dev
+      startCommand: node server/index.js
+      healthCheckPath: /healthz
+      autoDeploy: true
+      envVars:
+          - key: NODE_ENV
+            value: production
+          - key: NODE_VERSION
+            value: "22"
+          - key: JWT_SECRET
+            generateValue: true
+          - key: DB_SSL
+            value: "true"
+          - key: DB_HOST
+            sync: false
+          - key: DB_PORT
+            value: "4000"
+          - key: DB_USER
+            sync: false
+          - key: DB_PASSWORD
+            sync: false
+          - key: DB_NAME
+            sync: false
+          # Public demo: data is reset on every start and every 6 hours.
+          - key: DEMO_MODE
+            value: "true"
+          - key: DEMO_RESET_HOURS
+            value: "6"
