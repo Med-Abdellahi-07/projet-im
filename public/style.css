@@ -680,3 +680,17 @@ td.actions-table button { padding: 6px 12px; font-size: 12.5px; }
     .principal { margin-left: 0; }
     .contenu { padding: 18px; }
 }
+
+/* Home page summary row */
+.resume-accueil { margin-top: 24px; display: grid; gap: 16px; }
+.liste-resume { list-style: none; margin: 8px 0 0; padding: 0; }
+.liste-resume li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    padding: 8px 0;
+    border-top: 1px solid var(--bordure, #e5e7eb);
+    font-size: 14px;
+}
+.liste-resume li:first-child { border-top: 0; }
+.liste-resume .date { color: var(--texte-faible, #6b7280); }
