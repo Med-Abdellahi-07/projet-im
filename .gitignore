@@ -1,12 +1,13 @@
-# Dépendances installées par npm (se réinstallent avec "npm install")
-backend/node_modules/
+# Dependencies
+node_modules/
 
-# Fichier contenant les vrais mots de passe : ne JAMAIS le partager
-backend/.env
+# Local configuration with real secrets: never commit
+.env
 
-# Fichiers système
+# System files
 .DS_Store
 Thumbs.db
 
-# Logs
+# Logs and coverage
 npm-debug.log*
+coverage/
