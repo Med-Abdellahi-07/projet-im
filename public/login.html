@@ -17,7 +17,7 @@
                 <h1>Connexion</h1>
                 <p class="soustitre">Accédez au suivi des équipements, pannes et interventions.</p>
 
-                <div class="message-succes" id="message-succes" style="display:none;"></div>
+                <div class="message-succes" id="message-succes" hidden></div>
                 <div class="message-erreur-globale" id="message-erreur-globale"></div>
 
                 <form id="form-connexion">
@@ -37,96 +37,6 @@
                 <p class="lien-bas">Pas encore de compte ? <a href="inscription.html">Créer un compte</a></p>
             </div>
         </div>
-
-        <script>
-            const API_URL = "http://localhost:3000/api";
-
-            const params = new URLSearchParams(window.location.search);
-            if (params.get("verifie") === "1") {
-                const succes = document.getElementById("message-succes");
-                succes.textContent = "Votre compte a été vérifié avec succès. Vous pouvez vous connecter.";
-                succes.style.display = "block";
-            }
-
-            function afficherErreurChamp(id, message) {
-                const el = document.getElementById(id);
-                el.textContent = message;
-                el.classList.add("visible");
-            }
-
-            function cacherErreurChamp(id) {
-                const el = document.getElementById(id);
-                el.classList.remove("visible");
-                el.textContent = "";
-            }
-
-            function afficherErreurGlobale(message) {
-                const el = document.getElementById("message-erreur-globale");
-                el.textContent = message;
-                el.classList.add("visible");
-            }
-
-            function cacherErreurGlobale() {
-                const el = document.getElementById("message-erreur-globale");
-                el.classList.remove("visible");
-            }
-
-            document.getElementById("form-connexion").addEventListener("submit", async function (e) {
-                e.preventDefault();
-                cacherErreurGlobale();
-
-                const email = document.getElementById("email").value.trim();
-                const mot_de_passe = document.getElementById("mot_de_passe").value;
-
-                let valide = true;
-                if (email === "") {
-                    afficherErreurChamp("erreur-email", "L'adresse email est obligatoire.");
-                    valide = false;
-                } else {
-                    cacherErreurChamp("erreur-email");
-                }
-                if (mot_de_passe === "") {
-                    afficherErreurChamp("erreur-mot-de-passe", "Le mot de passe est obligatoire.");
-                    valide = false;
-                } else {
-                    cacherErreurChamp("erreur-mot-de-passe");
-                }
-                if (!valide) return;
-
-                const bouton = e.target.querySelector("button[type=submit]");
-                bouton.disabled = true;
-                bouton.textContent = "Connexion...";
-
-                try {
-                    const reponse = await fetch(`${API_URL}/auth/connexion`, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ email, mot_de_passe })
-                    });
-                    const resultat = await reponse.json();
-
-                    if (reponse.status === 403 && resultat.nonVerifie) {
-                        sessionStorage.setItem("emailEnAttenteVerification", email);
-                        window.location.href = "verification.html?depuis=login";
-                        return;
-                    }
-
-                    if (!reponse.ok) {
-                        afficherErreurGlobale(resultat.message || "Email ou mot de passe incorrect.");
-                        bouton.disabled = false;
-                        bouton.textContent = "Se connecter";
-                        return;
-                    }
-
-                    localStorage.setItem("utilisateurConnecte", JSON.stringify(resultat.utilisateur));
-                    window.location.href = "accueil.html";
-                } catch (erreur) {
-                    console.error(erreur);
-                    afficherErreurGlobale("Impossible de contacter le serveur. Vérifiez qu'il est bien démarré (npm start dans le dossier backend).");
-                    bouton.disabled = false;
-                    bouton.textContent = "Se connecter";
-                }
-            });
-        </script>
+        <script type="module" src="js/pages/login.js"></script>
     </body>
 </html>

@@ -17,7 +17,7 @@
                 <h1>Vérification du compte</h1>
                 <p class="soustitre" id="texte-explication">Un code à 6 chiffres a été envoyé par email. Saisissez-le ci-dessous pour activer votre compte.</p>
 
-                <div class="message-info" id="message-code-test" style="display:none;"></div>
+                <div class="message-info" id="message-code-test" hidden></div>
                 <div class="message-erreur-globale" id="message-erreur-globale"></div>
 
                 <form id="form-verification">
@@ -36,113 +36,6 @@
                 </p>
             </div>
         </div>
-
-        <script>
-            const API_URL = "http://localhost:3000/api";
-            const email = sessionStorage.getItem("emailEnAttenteVerification");
-
-            if (!email) {
-                window.location.href = "login.html";
-            }
-
-            const parametres = new URLSearchParams(window.location.search);
-            if (parametres.get("depuis") === "login") {
-                document.getElementById("texte-explication").textContent =
-                    "Ce compte n'est pas encore vérifié. Saisissez le code à 6 chiffres envoyé par email pour l'activer.";
-            }
-
-            const codeDeTest = sessionStorage.getItem("codeDeTest");
-            if (codeDeTest) {
-                const el = document.getElementById("message-code-test");
-                el.textContent = "Mode test (aucun serveur email configuré) : votre code est " + codeDeTest;
-                el.style.display = "block";
-            }
-
-            function afficherErreurGlobale(message) {
-                const el = document.getElementById("message-erreur-globale");
-                el.textContent = message;
-                el.classList.add("visible");
-            }
-            function cacherErreurGlobale() {
-                document.getElementById("message-erreur-globale").classList.remove("visible");
-            }
-
-            document.getElementById("form-verification").addEventListener("submit", async function (e) {
-                e.preventDefault();
-                cacherErreurGlobale();
-
-                const code = document.getElementById("code").value.trim();
-                const erreurCode = document.getElementById("erreur-code");
-
-                if (!/^[0-9]{6}$/.test(code)) {
-                    erreurCode.textContent = "Entrez les 6 chiffres du code.";
-                    erreurCode.classList.add("visible");
-                    return;
-                }
-                erreurCode.classList.remove("visible");
-
-                const bouton = e.target.querySelector("button[type=submit]");
-                bouton.disabled = true;
-                bouton.textContent = "Vérification...";
-
-                try {
-                    const reponse = await fetch(`${API_URL}/auth/verification`, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ email, code })
-                    });
-                    const resultat = await reponse.json();
-
-                    if (!reponse.ok) {
-                        afficherErreurGlobale(resultat.message || "Code incorrect.");
-                        bouton.disabled = false;
-                        bouton.textContent = "Vérifier le compte";
-                        return;
-                    }
-
-                    sessionStorage.removeItem("emailEnAttenteVerification");
-                    sessionStorage.removeItem("codeDeTest");
-                    window.location.href = "login.html?verifie=1";
-                } catch (erreur) {
-                    console.error(erreur);
-                    afficherErreurGlobale("Impossible de contacter le serveur. Vérifiez qu'il est bien démarré (npm start dans le dossier backend).");
-                    bouton.disabled = false;
-                    bouton.textContent = "Vérifier le compte";
-                }
-            });
-
-            document.getElementById("lien-renvoyer").addEventListener("click", async function (e) {
-                e.preventDefault();
-                cacherErreurGlobale();
-
-                try {
-                    const reponse = await fetch(`${API_URL}/auth/renvoyer-code`, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ email })
-                    });
-                    const resultat = await reponse.json();
-
-                    if (!reponse.ok) {
-                        afficherErreurGlobale(resultat.message || "Impossible de renvoyer un code.");
-                        return;
-                    }
-
-                    if (resultat.codeDeTest) {
-                        sessionStorage.setItem("codeDeTest", resultat.codeDeTest);
-                        const el = document.getElementById("message-code-test");
-                        el.textContent = "Mode test (aucun serveur email configuré) : votre nouveau code est " + resultat.codeDeTest;
-                        el.style.display = "block";
-                    } else {
-                        const el = document.getElementById("message-code-test");
-                        el.textContent = "Un nouveau code vient d'être envoyé par email.";
-                        el.style.display = "block";
-                    }
-                } catch (erreur) {
-                    console.error(erreur);
-                    afficherErreurGlobale("Impossible de contacter le serveur.");
-                }
-            });
-        </script>
+        <script type="module" src="js/pages/verify.js"></script>
     </body>
 </html>

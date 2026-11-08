@@ -77,13 +77,21 @@
                                     </select>
                                 </div>
                             </div>
+                            <div id="champ-statut" hidden>
+                                <label for="statut">Statut</label>
+                                <select id="statut" name="statut">
+                                    <option value="Ouverte">Ouverte</option>
+                                    <option value="Résolue">Résolue</option>
+                                </select>
+                            </div>
+
                             <label for="description">Description</label>
                             <textarea id="description" name="description" rows="3" placeholder="décrire la panne observée"></textarea>
                             <div class="erreur" id="erreur-description"></div>
 
                             <div class="actions-formulaire">
                                 <button type="submit">Enregistrer</button>
-                                <button type="button" class="secondaire" id="bouton-annuler-panne" style="display:none;">Annuler la modification</button>
+                                <button type="button" class="secondaire" id="bouton-annuler-panne" hidden>Annuler la modification</button>
                             </div>
                         </form>
                     </div>
@@ -98,6 +106,7 @@
                                         <th>Date</th>
                                         <th>Description</th>
                                         <th>Priorité</th>
+                                        <th>Statut</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -109,6 +118,6 @@
             </div>
         </div>
 
-        <script src="script.js"></script>
+        <script type="module" src="js/pages/pannes.js"></script>
     </body>
 </html>
