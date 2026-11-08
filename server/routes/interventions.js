@@ -14,6 +14,10 @@ const SELECT_LIST = `SELECT i.id, i.date_intervention, i.technicien, i.observati
                      LEFT JOIN intervention_panne ip ON ip.intervention_id = i.id
                      LEFT JOIN pannes p ON p.id = ip.panne_id`;
 
+// Every selected column is listed, so the query is valid with ONLY_FULL_GROUP_BY on any server.
+const GROUP_BY =
+    "GROUP BY i.id, i.date_intervention, i.technicien, i.observations, e.id, e.code, e.designation";
+
 async function requireEquipement(connection, id) {
     const [rows] = await connection.query("SELECT id FROM equipements WHERE id = ?", [id]);
     if (rows.length === 0) throw new ValidationError("Équipement introuvable.", "equipement_id");
@@ -99,14 +103,14 @@ function interventionsRoutes({ pool }) {
 
     router.get("/", async (req, res) => {
         const [rows] = await pool.query(
-            `${SELECT_LIST} GROUP BY i.id ORDER BY i.date_intervention DESC, i.id DESC`,
+            `${SELECT_LIST} ${GROUP_BY} ORDER BY i.date_intervention DESC, i.id DESC`,
         );
         res.json(rows);
     });
 
     router.get("/:id", async (req, res) => {
         const id = parseId(req.params.id);
-        const [rows] = await pool.query(`${SELECT_LIST} WHERE i.id = ? GROUP BY i.id`, [id]);
+        const [rows] = await pool.query(`${SELECT_LIST} WHERE i.id = ? ${GROUP_BY}`, [id]);
         if (rows.length === 0) throw new HttpError(404, "Intervention introuvable.");
         const panneIds = await linkedPanneIds(pool, id);
         res.json({ ...rows[0], panne_ids: panneIds });
