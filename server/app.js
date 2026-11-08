@@ -28,6 +28,9 @@ function createApp({ pool, config, mailer }) {
     app.use(cookieParser());
     app.use("/api", sameOriginForWrites(config));
 
+    // Used by the hosting platform to know the service is up (no database access).
+    app.get("/healthz", (req, res) => res.json({ status: "ok" }));
+
     // Public API: sign-up, verification, login, logout.
     const deps = { pool, config, mailer };
     app.use("/api/auth", authRoutes(deps));

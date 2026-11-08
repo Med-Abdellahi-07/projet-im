@@ -46,6 +46,12 @@ describe("every /api route except /api/auth requires a session", () => {
         expect(res.status).toBe(401);
     });
 
+    test("the health check stays public", async () => {
+        const res = await request(ctx.app).get("/healthz");
+        expect(res.status).toBe(200);
+        expect(res.body).toEqual({ status: "ok" });
+    });
+
     test("static pages stay public", async () => {
         const res = await request(ctx.app).get("/login.html");
         expect(res.status).toBe(200);
